@@ -36,7 +36,7 @@ export class TasksController {
   updateTaskStatus(
     @Param('id') id: string,
     @Body() updateTaskDto: UpdateTaskStatusDto,
-  ): Task {
+  ): Promise<Task> {
     const {status} = updateTaskDto;
     return this.tasksService.updateTaskStatus(id, status);
   }
