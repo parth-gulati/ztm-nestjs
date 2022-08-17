@@ -5,6 +5,10 @@ import { Task } from './task.entity';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
+  async deleteTaskById(id: string) {
+    return this.delete(id);
+  }
+
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     const { title, description } = createTaskDto;
 
@@ -14,14 +18,8 @@ export class TaskRepository extends Repository<Task> {
       status: TaskStatus.OPEN,
     });
 
-    console.log(task);
-
     await this.save(task);
 
     return task;
-  }
-
-  async deleteTaskById(id: string) {
-    return this.delete(id);
   }
 }
